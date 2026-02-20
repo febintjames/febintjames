@@ -16,12 +16,14 @@
 </head>
 
 <body>
-    <!-- Preloader -->
     <div id="preloader">
         <div class="loader-ring">
             <div class="loader-ring-inner"></div>
         </div>
-        <p class="loader-text">Initializing Systems...</p>
+        <div class="loader-content">
+            <p class="loader-text">Initializing Systems...</p>
+            <div class="loader-subtext" id="loaderSubtext">Searching for ROS nodes...</div>
+        </div>
     </div>
 
     <!-- Cursor Trail Canvas -->
@@ -792,6 +794,66 @@
             </ul>
             <button id="voiceGuideStart" class="btn btn-primary" style="width:100%;margin-top:12px;padding:12px;"><i
                     class="fas fa-microphone"></i> Start Listening</button>
+        </div>
+    </div>
+
+    <!-- Robotic System Control Center (HUD) -->
+    <div id="rosHUD" class="ros-hud">
+        <div class="hud-container">
+            <div class="hud-left">
+                <div class="hud-stat" id="hudBattery">
+                    <span class="hud-label">BATTERY</span>
+                    <div class="hud-progress-container">
+                        <div class="hud-progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <span class="hud-value">85%</span>
+                </div>
+                <div class="hud-stat" id="hudCPU">
+                    <span class="hud-label">CPU</span>
+                    <div class="hud-progress-container">
+                        <div class="hud-progress-bar" style="width: 12%;"></div>
+                    </div>
+                    <span class="hud-value">12%</span>
+                </div>
+            </div>
+
+            <div class="hud-center">
+                <button id="terminalToggle" class="hud-terminal-btn">
+                    <i class="fas fa-terminal"></i> <span>ROS Terminal</span>
+                </button>
+                <div class="hud-status-node">
+                    <span class="node-dot status-online"></span>
+                    <span class="node-name">MASTER_NODE</span>
+                </div>
+            </div>
+
+            <div class="hud-right">
+                <div class="hud-data-item">
+                    <span class="hud-label">IMU:YAW</span>
+                    <span class="hud-value" id="imuYaw">0.0°</span>
+                </div>
+                <div class="hud-data-item">
+                    <span class="hud-label">SCAN</span>
+                    <span class="hud-value status-active">ACTIVE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive ROS Terminal (Hidden by default) -->
+        <div id="rosTerminal" class="ros-terminal">
+            <div class="terminal-header">
+                <div class="terminal-title"><i class="fas fa-microchip"></i> ros2_workspace/logs</div>
+                <div class="terminal-controls">
+                    <span class="control-dot"></span>
+                    <span class="control-dot"></span>
+                    <span class="control-dot"></span>
+                </div>
+            </div>
+            <div id="terminalBody" class="terminal-body">
+                <div class="log-line info">[INFO] [ros2]: Base system initialized successfully.</div>
+                <div class="log-line info">[INFO] [nav2]: Navigation server ready.</div>
+                <div class="log-line info">[INFO] [vision]: YOLOv8 engine loaded.</div>
+            </div>
         </div>
     </div>
 

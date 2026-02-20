@@ -1683,6 +1683,14 @@ footer strong {
     backdrop-filter: blur(10px);
 }
 
+.loader-subtext {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
 /* ========== COMMAND PALETTE ========== */
 .cmd-palette {
     position: fixed;
@@ -1795,7 +1803,7 @@ footer strong {
 /* ========== AI CHAT WIDGET ========== */
 .chat-widget {
     position: fixed;
-    bottom: 24px;
+    bottom: 80px;
     right: 24px;
     z-index: 9000;
 }
@@ -2074,7 +2082,7 @@ footer strong {
 /* ========== VOICE GUIDE WIDGET ========== */
 .voice-guide {
     position: fixed;
-    bottom: 24px;
+    bottom: 80px;
     left: 24px;
     z-index: 9000;
 }
@@ -2401,5 +2409,260 @@ footer strong {
 
     .project-links {
         flex-wrap: wrap;
+    }
+}
+
+/* ========== ROBOTIC HUD & TERMINAL ========== */
+.ros-hud {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9998;
+    pointer-events: none;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.hud-container {
+    background: rgba(6, 6, 18, 0.85);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--accent-cyan);
+    padding: 8px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hud-left,
+.hud-right {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.hud-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hud-label {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.hud-progress-container {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.hud-progress-bar {
+    height: 100%;
+    background: var(--accent-cyan);
+    transition: width 0.5s ease;
+}
+
+.hud-value {
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    min-width: 40px;
+}
+
+.hud-terminal-btn {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.hud-terminal-btn:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+}
+
+.hud-status-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.node-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.node-dot.status-online {
+    background: #00ff9d;
+    box-shadow: 0 0 10px #00ff9d;
+    animation: blink 1.5s infinite;
+}
+
+.node-name {
+    font-size: 0.6rem;
+    color: var(--text-secondary);
+}
+
+.ros-terminal {
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    width: 400px;
+    background: rgba(12, 12, 36, 0.95);
+    border: 1px solid var(--accent-cyan);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: auto;
+}
+
+.ros-terminal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.terminal-header {
+    background: rgba(0, 240, 255, 0.1);
+    padding: 6px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.terminal-title {
+    font-size: 0.65rem;
+    color: var(--accent-cyan);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.control-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    margin-left: 4px;
+}
+
+.terminal-body {
+    height: 200px;
+    padding: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    overflow-y: auto;
+    color: #e0e0e0;
+}
+
+.log-line {
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: logFadeIn 0.3s forwards;
+}
+
+.log-line.info {
+    color: #00ff9d;
+}
+
+.log-line.warn {
+    color: #ffca28;
+}
+
+.log-line.error {
+    color: #ff5252;
+}
+
+@keyframes logFadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* LiDAR Scan Effect */
+.lidar-scan {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
+    background:
+        radial-gradient(circle at center, transparent 0%, transparent 60%, var(--accent-cyan) 100%),
+        repeating-radial-gradient(circle at center, transparent 0, transparent 40px, rgba(0, 240, 255, 0.05) 41px);
+}
+
+.scan-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150vmax;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    transform-origin: center;
+    animation: rotateScan 6s linear infinite;
+    filter: blur(2px);
+}
+
+@keyframes rotateScan {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hud-stat,
+    .hud-status-node {
+        display: none;
+    }
+
+    .hud-container {
+        padding: 8px 16px;
+    }
+
+    .ros-terminal {
+        width: calc(100vw - 40px);
+        left: 20px;
     }
 }

@@ -40,7 +40,26 @@
 })();
 
 /* ========== 2. PRELOADER ========== */
-addEventListener('load', () => { const p = document.getElementById('preloader'); if (p) setTimeout(() => p.classList.add('hidden'), 1500); });
+addEventListener('load', () => {
+    const p = document.getElementById('preloader');
+    const sub = document.getElementById('loaderSubtext');
+    if (!sub) return;
+
+    const messages = [
+        'Searching for ROS nodes...',
+        'Connecting to master_node...',
+        'Loading SLAM transforms...',
+        'Initializing LiDAR scan...',
+        'System ready.'
+    ];
+    let i = 0;
+    const interval = setInterval(() => {
+        sub.textContent = messages[i++];
+        if (i >= messages.length) clearInterval(interval);
+    }, 300);
+
+    if (p) setTimeout(() => p.classList.add('hidden'), 2000);
+});
 
 /* ========== 3. SPA ROUTER ========== */
 const SPA = {
@@ -464,5 +483,106 @@ document.querySelectorAll('.project-img-carousel').forEach(carousel => {
     setInterval(() => show((cur + 1) % imgs.length), 4000);
 });
 
+/* ========== 17. ROBOTIC SYSTEM ENGINE (ROS & TELEMETRY) ========== */
+const ROSEngine = {
+    logs: [
+        { type: 'info', node: 'ros2', msg: 'Base system initialized.' },
+        { type: 'info', node: 'nav2', msg: 'Map server online.' },
+        { type: 'info', node: 'vision', msg: 'Inference engine active.' }
+    ],
+    isTerminalOpen: false,
+
+    init() {
+        this.initHUD();
+        this.initTelemetry();
+        this.initLidar();
+        this.addLog('info', 'ros2', 'Robotic System Interface fully operational.');
+    },
+
+    initHUD() {
+        const toggleBtn = document.getElementById('terminalToggle');
+        const terminal = document.getElementById('rosTerminal');
+        if (toggleBtn && terminal) {
+            toggleBtn.addEventListener('click', () => {
+                this.isTerminalOpen = !this.isTerminalOpen;
+                terminal.classList.toggle('active', this.isTerminalOpen);
+                toggleBtn.querySelector('span').textContent = this.isTerminalOpen ? 'Hide Logs' : 'ROS Terminal';
+            });
+        }
+    },
+
+    initTelemetry() {
+        // Battery simulation
+        let battery = 85;
+        const bBar = document.querySelector('#hudBattery .hud-progress-bar');
+        const bVal = document.querySelector('#hudBattery .hud-value');
+
+        // CPU simulation
+        const cBar = document.querySelector('#hudCPU .hud-progress-bar');
+        const cVal = document.querySelector('#hudCPU .hud-value');
+
+        // IMU simulation
+        const imuYaw = document.getElementById('imuYaw');
+        let yaw = 0;
+
+        setInterval(() => {
+            // Fluctuating CPU
+            const cpu = Math.floor(Math.random() * 15) + 10;
+            if (cBar) cBar.style.width = cpu + '%';
+            if (cVal) cVal.textContent = cpu + '%';
+
+            // Slowly draining battery (illusory)
+            if (fr % 1000 === 0) {
+                battery = Math.max(0, battery - 0.1);
+                if (bBar) bBar.style.width = battery + '%';
+                if (bVal) bVal.textContent = Math.floor(battery) + '%';
+            }
+
+            // IMU Drift simulation
+            yaw += (Math.random() - 0.5) * 0.5;
+            if (imuYaw) imuYaw.textContent = yaw.toFixed(1) + '°';
+        }, 1500);
+    },
+
+    initLidar() {
+        const container = document.createElement('div');
+        container.className = 'lidar-scan';
+        container.innerHTML = '<div class="scan-line"></div>';
+        document.body.appendChild(container);
+    },
+
+    addLog(type, node, msg) {
+        const body = document.getElementById('terminalBody');
+        if (!body) return;
+
+        const line = document.createElement('div');
+        line.className = `log-line ${type}`;
+        const time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        line.innerHTML = `<span style="color: var(--text-secondary); opacity: 0.6">[${time}]</span> [${type.toUpperCase()}] [${node}]: ${msg}`;
+
+        body.appendChild(line);
+        body.scrollTop = body.scrollHeight;
+
+        // Limit log history
+        if (body.children.length > 50) body.removeChild(body.children[0]);
+    }
+};
+
+// Integrate with SPA and Actions
+const originalNavigate = SPA.navigate;
+SPA.navigate = function (page) {
+    originalNavigate.call(SPA, page);
+    ROSEngine.addLog('info', 'nav2', `Executing plan to goal: /page/${page}`);
+    ROSEngine.addLog('info', 'ros2', `Activating node: page_manager_${page}`);
+};
+
+// Global fr variable shared with three.js if needed, or local
+let fr = 0;
+setInterval(() => fr++, 16);
+
+// Start the engine
+ROSEngine.init();
+
 /* ========== INIT SPA ========== */
 SPA.init();
+

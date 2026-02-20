@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Febin T James | Jr. Robotics & AI Engineer</title>
+    <meta name="description"
+        content="Portfolio of Febin T James — Junior Robotics & AI Engineer specializing in ROS 2, Autonomous Navigation, and AI-driven Perception Systems.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-ring">
+            <div class="loader-ring-inner"></div>
+        </div>
+        <p class="loader-text">Initializing Systems...</p>
+    </div>
+
+    <!-- Cursor Trail Canvas -->
+    <canvas id="cursor-canvas"></canvas>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" data-page="home"><span class="logo-bracket">&lt;</span>FTJ<span
+                    class="logo-bracket">/&gt;</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="about">About</a></li>
+                <li><a href="#" data-page="experience">Experience</a></li>
+                <li><a href="#" data-page="projects">Projects</a></li>
+                <li><a href="#" data-page="education">Education</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="voiceBtn" class="nav-icon-btn" title="Voice Navigation"><i
+                        class="fas fa-microphone"></i></button>
+                <button id="cmdPaletteBtn" class="nav-icon-btn" title="Command Palette (Ctrl+K)"><i
+                        class="fas fa-search"></i></button>
+            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- Voice Feedback -->
+    <div id="voiceFeedback" class="voice-feedback">
+        <div class="voice-ring"></div>
+        <p id="voiceText">Listening...</p>
+    </div>
+
+    <!-- Command Palette -->
+    <div id="cmdPalette" class="cmd-palette">
+        <div class="cmd-palette-content">
+            <div class="cmd-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="cmdInput" placeholder="Type a command... (e.g. 'projects', 'skills', 'contact')"
+                    autocomplete="off">
+                <kbd>ESC</kbd>
+            </div>
+            <ul id="cmdResults" class="cmd-results"></ul>
+        </div>
+    </div>
+
+    <!-- ==================== SPA PAGE SECTIONS ==================== -->
+    <main id="pageContainer">
+
+        <!-- ===== HOME PAGE ===== -->
+        <div class="spa-page active" id="page-home">
+            <section id="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">JR. ROBOTICS & AI ENGINEER</div>
+                    <h1 class="hero-title">
+                        <span class="hero-greeting">Hello, I'm</span>
+                        <span class="hero-name">Febin T James</span>
+                    </h1>
+                    <p class="hero-subtitle">I build <span id="typed-text"></span><span class="cursor">|</span></p>
+                    <p class="hero-description">Junior Robotics & AI Engineer at Qmark Technolabs. Expert in ROS 2,
+                        autonomous navigation (Nav2/SLAM), and AI-driven perception systems. AMR Team Lead bridging
+                        hardware assembly and intelligent software control.</p>
+                    <div class="hero-cta">
+                        <a href="#" data-page="projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View
+                            Projects</a>
+                        <a href="#" data-page="contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Get in
+                            Touch</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat"><span class="stat-num" data-target="12">0</span>+ <span
+                                class="stat-label">Projects</span></div>
+                        <div class="stat"><span class="stat-num" data-target="5">0</span> <span
+                                class="stat-label">Roles</span></div>
+                        <div class="stat"><span class="stat-num" data-target="10">0</span>+ <span
+                                class="stat-label">Tech Stacks</span></div>
+                    </div>
+                </div>
+                <div class="scroll-indicator" style="cursor:pointer" data-page="about">
+                    <div class="mouse">
+                        <div class="wheel"></div>
+                    </div>
+                    <span>Explore</span>
+                </div>
+            </section>
+            <section class="section page-nav-section">
+                <div class="container">
+                    <div class="page-nav-grid">
+                        <a href="#" data-page="about" class="page-nav-card glass-card"><i
+                                class="fas fa-user-astronaut"></i>
+                            <h3>About & Skills</h3>
+                            <p>Who I am & what I bring</p><span class="card-arrow"><i
+                                    class="fas fa-arrow-right"></i></span>
+                        </a>
+                        <a href="#" data-page="experience" class="page-nav-card glass-card"><i
+                                class="fas fa-briefcase"></i>
+                            <h3>Experience</h3>
+                            <p>5 roles in robotics & tech</p><span class="card-arrow"><i
+                                    class="fas fa-arrow-right"></i></span>
+                        </a>
+                        <a href="#" data-page="projects" class="page-nav-card glass-card"><i
+                                class="fas fa-project-diagram"></i>
+                            <h3>Projects</h3>
+                            <p>12+ robotics & AI builds</p><span class="card-arrow"><i
+                                    class="fas fa-arrow-right"></i></span>
+                        </a>
+                        <a href="#" data-page="education" class="page-nav-card glass-card"><i
+                                class="fas fa-graduation-cap"></i>
+                            <h3>Education & Certs</h3>
+                            <p>Degrees, workshops, awards</p><span class="card-arrow"><i
+                                    class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== ABOUT PAGE ===== -->
+        <div class="spa-page" id="page-about">
+            <section class="section" style="padding-top:120px;">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">01.</span> About Me</h2>
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <p>A <strong>Junior Robotics and AI Engineer</strong> with a unique background in Computer
+                                Science and hands-on mechanical fabrication. Successfully transitioned from a
+                                top-performing trainee to a <strong>permanent employee at Qmark Technolabs</strong>.</p>
+                            <p>Expert in <strong>ROS 2, autonomous navigation (Nav2/SLAM)</strong>, and AI-driven
+                                perception systems. Proven leadership as an <strong>AMR Team Lead</strong>, specializing
+                                in bridging the gap between hardware assembly and intelligent software control.</p>
+                            <p>Passionate about building production-grade robotic systems — from 3D mechanical design to
+                                embedded firmware to intelligent navigation stacks.</p>
+                            <div class="about-info">
+                                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kochi, Kerala, India</div>
+                                <div class="info-item"><i class="fas fa-graduation-cap"></i> B.Tech Computer Science,
+                                    Providence College</div>
+                                <div class="info-item"><i class="fas fa-briefcase"></i> Jr. Robotics & AI Engineer @
+                                    Qmark Technolabs</div>
+                                <div class="info-item"><i class="fas fa-language"></i> Malayalam (Native) · English
+                                    (Professional)</div>
+                            </div>
+                        </div>
+                        <div class="about-image">
+                            <div class="image-frame">
+                                <div class="frame-corner tl"></div>
+                                <div class="frame-corner tr"></div>
+                                <div class="frame-corner bl"></div>
+                                <div class="frame-corner br"></div>
+                                <img src="images/IMG_20250830_223252_0551.jpg" alt="Febin T James"
+                                    class="profile-photo">
+                                <div class="placeholder-avatar"><i class="fas fa-robot"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">02.</span> Technical Arsenal</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <h3>Robotics & AI</h3>
+                            <div class="skill-tags"><span class="tag">ROS 2 (Humble/Jazzy)</span><span
+                                    class="tag">Nav2</span><span class="tag">SLAM</span><span
+                                    class="tag">Gazebo</span><span class="tag">Rviz2</span><span
+                                    class="tag">YOLOv8</span><span class="tag">TensorFlow</span><span
+                                    class="tag">OpenCV</span><span class="tag">MediaPipe</span></div>
+                        </div>
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-cogs"></i></div>
+                            <h3>Hardware & Design</h3>
+                            <div class="skill-tags"><span class="tag">Fusion 360</span><span class="tag">3D
+                                    Printing</span><span class="tag">Mechanical Fabrication</span><span
+                                    class="tag">Sensor Integration</span></div>
+                        </div>
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                            <h3>Embedded & Platforms</h3>
+                            <div class="skill-tags"><span class="tag">C++</span><span class="tag">Embedded C</span><span
+                                    class="tag">Python</span><span class="tag">Linux</span><span class="tag">Jetson
+                                    Nano</span><span class="tag">Raspberry Pi 4</span><span
+                                    class="tag">Arduino</span><span class="tag">ESP32</span></div>
+                        </div>
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-globe"></i></div>
+                            <h3>Web & Mobile</h3>
+                            <div class="skill-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span
+                                    class="tag">JavaScript</span><span class="tag">React</span><span
+                                    class="tag">Angular</span><span class="tag">Flutter</span><span
+                                    class="tag">Django</span><span class="tag">Flask</span><span
+                                    class="tag">Streamlit</span><span class="tag">Gradio</span></div>
+                        </div>
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <h3>Data & ML</h3>
+                            <div class="skill-tags"><span class="tag">Pandas</span><span class="tag">NumPy</span><span
+                                    class="tag">PyTorch</span><span class="tag">Scikit-learn</span><span
+                                    class="tag">MySQL</span><span class="tag">Hugging Face</span></div>
+                        </div>
+                        <div class="skill-category glass-card">
+                            <div class="skill-icon"><i class="fas fa-users-cog"></i></div>
+                            <h3>Professional</h3>
+                            <div class="skill-tags"><span class="tag">Team Leadership</span><span class="tag">Project
+                                    Management</span><span class="tag">Technical Docs</span><span
+                                    class="tag">Cross-functional Collab</span><span class="tag">Git</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="page-nav-bar">
+                <a href="#" data-page="home" class="page-nav-btn"><i class="fas fa-arrow-left"></i> Home</a>
+                <span class="page-nav-indicator">About & Skills</span>
+                <a href="#" data-page="experience" class="page-nav-btn">Experience <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ===== EXPERIENCE PAGE ===== -->
+        <div class="spa-page" id="page-experience">
+            <section class="section" style="padding-top:120px;">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">03.</span> Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <h3>Jr. Robotics and AI Engineer</h3><span class="timeline-company">Qmark
+                                        Technolabs</span>
+                                </div>
+                                <div class="timeline-meta"><span><i class="fas fa-calendar"></i> Jan 2026 –
+                                        Present</span><span><i class="fas fa-map-marker-alt"></i> Kochi, Kerala</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Leading design, assembly, and testing of industrial robotic systems.</li>
+                                    <li>Developing ML models for perception and automation using Python.</li>
+                                    <li>Managing system integration with strict coding standards.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <h3>Jr. Robotics & AI Engineer Intern (Paid)</h3><span
+                                        class="timeline-company">Qmark Technolabs</span>
+                                </div>
+                                <div class="timeline-meta"><span><i class="fas fa-calendar"></i> Nov 2025 – Jan
+                                        2026</span><span><i class="fas fa-map-marker-alt"></i> Kochi, Kerala</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Selected for 2-month stipend-based internship after 4-month evaluation.</li>
+                                    <li>Integrated sensors and microcontrollers into embedded platforms.</li>
+                                    <li>Developed computer vision features for robotic prototypes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <h3>Graduate Robotics Intern</h3><span class="timeline-company">Qmark
+                                        Technolabs</span>
+                                </div>
+                                <div class="timeline-meta"><span><i class="fas fa-calendar"></i> June 2025 – Nov
+                                        2025</span><span><i class="fas fa-map-marker-alt"></i> Kochi, Kerala</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Intensive robotics and AI curriculum — ROS 2, SLAM, 3D modeling.</li>
+                                    <li>Expertise in Embedded C, Gazebo, and Rviz.</li>
+                                    <li>Initiated design of the LuQ autonomous delivery robot.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <h3>Machine Learning Fundamentals Intern</h3><span
+                                        class="timeline-company">Keltron</span>
+                                </div>
+                                <div class="timeline-meta"><span><i class="fas fa-calendar"></i> September
+                                        2023</span><span><i class="fas fa-map-marker-alt"></i> Trivandrum, Kerala</span>
+                                </div>
+                                <ul class="timeline-details">
+                                    <li>Applied supervised/unsupervised learning algorithms.</li>
+                                    <li>Data manipulation with Pandas and NumPy.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <h3>Front-End Development Intern</h3><span
+                                        class="timeline-company">NextDigital</span>
+                                </div>
+                                <div class="timeline-meta"><span><i class="fas fa-calendar"></i> March
+                                        2023</span><span><i class="fas fa-map-marker-alt"></i> Kerala</span></div>
+                                <ul class="timeline-details">
+                                    <li>Front-end skills in HTML, CSS, JavaScript, Angular.</li>
+                                    <li>Built responsive layouts for travel websites.</li>
+                                    <li>Designed individual portfolios for clients.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="page-nav-bar">
+                <a href="#" data-page="about" class="page-nav-btn"><i class="fas fa-arrow-left"></i> About</a>
+                <span class="page-nav-indicator">Experience</span>
+                <a href="#" data-page="projects" class="page-nav-btn">Projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ===== PROJECTS PAGE ===== -->
+        <div class="spa-page" id="page-projects">
+            <section class="section" style="padding-top:120px;">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">04.</span> Featured Projects</h2>
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="robotics">Robotics</button>
+                        <button class="filter-btn" data-filter="cv">Computer Vision</button>
+                        <button class="filter-btn" data-filter="ai">AI</button>
+                        <button class="filter-btn" data-filter="iot">IoT</button>
+                    </div>
+                    <div class="projects-grid">
+                        <div class="project-card glass-card" data-category="robotics">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/IMG-20260129-WA0109.jpg" alt="LuQ Robot"
+                                        class="carousel-img active">
+                                    <img src="images/IMG-20260129-WA0042.jpg" alt="LuQ Team" class="carousel-img">
+                                    <div class="carousel-dots">
+                                        <span class="dot active" data-idx="0"></span>
+                                        <span class="dot" data-idx="1"></span>
+                                    </div>
+                                </div>
+                                <div class="project-badge">Team Lead</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>LuQ — Autonomous Delivery Robot</h3>
+                                <p>Production-grade AMR using ROS 2 on Raspberry Pi 4. Nav2, SLAM, ESP32 firmware,
+                                    AprilTag docking, ROSBridge web interface.</p>
+                                <div class="project-tech"><span>ROS
+                                        2</span><span>Nav2</span><span>SLAM</span><span>Python</span><span>C++</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a>
+                                    <button class="btn-play-video" data-video="images/IMG_1768.MP4"><i
+                                            class="fas fa-play"></i> Video 1</button>
+                                    <button class="btn-play-video" data-video="images/VID-20260129-WA0085.mp4"><i
+                                            class="fas fa-play"></i> Video 2</button>
+                                    <button class="btn-play-video" data-video="images/Video-584.mp4"><i
+                                            class="fas fa-play"></i> Video 3</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-cyan"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="robotics">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/Screenshot_2026-02-20-14-59-23-86_99c04817c0de5652397fc8b56c3b3817.jpg"
+                                        alt="Robotic Arm" class="carousel-img active">
+
+                                    <div class="carousel-dots">
+                                        <span class="dot active" data-idx="0"></span>
+                                        <span class="dot" data-idx="1"></span>
+                                    </div>
+                                </div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>ROS-Enabled 6-Axis Robotic Arm</h3>
+                                <p>6-DoF arm with 3D-printed parts and MicroROS for precise pick-and-place.</p>
+                                <div class="project-tech"><span>MicroROS</span><span>ESP32</span><span>Fusion
+                                        360</span><span>3D Printing</span></div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a>
+                                    <button class="btn-play-video" data-video="images/ContentStudio_video.mp4"><i
+                                            class="fas fa-play"></i> Video</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-purple"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="ai">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/IMG-20251201-WA0064.jpg" alt="UAE AI Avatar Kiosk"
+                                        class="carousel-img active">
+                                </div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>UAE National Day AI Avatar Kiosk</h3>
+                                <p>Generative AI kiosk — personalized videos from photos using Nano Banana Pro & Wan
+                                    2.2.</p>
+                                <div class="project-tech"><span>Generative AI</span><span>AWS
+                                        EC2/S3</span><span>Python</span></div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a>
+                                    <button class="btn-play-video" data-video="images/VID-20251201-WA0099.mp4"><i
+                                            class="fas fa-play"></i> Video</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-gold"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="cv">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/Screenshot_2026-02-20-15-02-08-78_99c04817c0de5652397fc8b56c3b3817.jpg"
+                                        alt="Gesture Control" class="carousel-img active">
+                                </div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Touchless Gesture Control System</h3>
+                                <p>Touchless HRI — hand gestures to computer commands in real-time.</p>
+                                <div class="project-tech">
+                                    <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>HRI</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i>
+                                        Code</a>
+                                    <button class="btn-play-video"
+                                        data-video="images/output_progressive_16ab19a0-f1cf-4cbd-9a2b-ac48cc54fb3a.mp4"><i
+                                            class="fas fa-play"></i> Video</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-green"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="cv">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/Screenshot_2026-02-20-15-01-36-40_99c04817c0de5652397fc8b56c3b3817.jpg"
+                                        alt="Human Detection" class="carousel-img active">
+                                </div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Real-time Human Detection & Alert</h3>
+                                <p>YOLOv8 perception system with auto capture, alarm, and email alerts.</p>
+                                <div class="project-tech">
+                                    <span>Python</span><span>YOLOv8</span><span>OpenCV</span><span>smtplib</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i>
+                                        Code</a>
+                                    <button class="btn-play-video"
+                                        data-video="images/output_progressive_1c6e2494-1eff-4691-bef8-ec437362fb7e.mp4"><i
+                                            class="fas fa-play"></i> Video</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-red"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="ai">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-comments"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>AI Chatbot for ROS Developers</h3>
+                                <p>LLM-powered chatbot for ROS help, deployed on Hugging Face Spaces.</p>
+                                <div class="project-tech"><span>Python</span><span>Gradio</span><span>LLM
+                                        API</span><span>Groq</span></div>
+                                <div class="project-links">
+                                    <a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i>
+                                        Code</a>
+                                    <button class="btn-play-video"
+                                        data-video="images/output_progressive_d9f6d8d1-7036-4291-9ce2-17910684128d.mp4"><i
+                                            class="fas fa-play"></i> Video</button>
+                                </div>
+                            </div>
+                            <div class="project-glow glow-blue"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="cv ai">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-baby"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Emotion Detection of Infants</h3>
+                                <p>Deep learning — classifying infant emotions from facial expressions and cries.</p>
+                                <div class="project-tech">
+                                    <span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>Streamlit</span>
+                                </div>
+                                <div class="project-links"><a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a></div>
+                            </div>
+                            <div class="project-glow glow-pink"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="iot">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-mitten"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>FlexiSense — Smart Glove</h3>
+                                <p>Flex sensor glove for deaf & speech impaired individuals via ESP32.</p>
+                                <div class="project-tech"><span>Arduino</span><span>ESP32</span><span>Flex
+                                        Sensors</span><span>C++</span></div>
+                                <div class="project-links"><a href="https://github.com/febintjames/FlexiSense"
+                                        target="_blank"><i class="fab fa-github"></i> Code</a></div>
+                            </div>
+                            <div class="project-glow glow-orange"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="iot">
+                            <div class="project-media">
+                                <div class="project-img-carousel">
+                                    <img src="images/Screenshot_2026-02-20-15-01-10-03_99c04817c0de5652397fc8b56c3b3817.jpg"
+                                        alt="Smart Curtain" class="carousel-img active">
+                                </div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Smart Curtain System</h3>
+                                <p>IoT automated curtain with smart controls and wireless connectivity.</p>
+                                <div class="project-tech">
+                                    <span>IoT</span><span>ESP32</span><span>Arduino</span><span>Embedded C</span>
+                                </div>
+                                <div class="project-links"><a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a><button class="btn-play-video"
+                                        data-video="images/output_progressive_a2be3deb-c8a7-4db1-905b-7933c8246f69.mp4"><i
+                                            class="fas fa-play"></i> Demo</button></div>
+                            </div>
+                            <div class="project-glow glow-teal"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="iot">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-lightbulb"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Motion-Based Street Light</h3>
+                                <p>Motion-activated street lighting for energy-efficient infrastructure.</p>
+                                <div class="project-tech"><span>IoT</span><span>Arduino</span><span>Sensors</span></div>
+                                <div class="project-links"><a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a></div>
+                            </div>
+                            <div class="project-glow glow-gold"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="iot">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-recycle"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Wet & Dry Waste Segregation</h3>
+                                <p>IoT sensors classify and sort waste for smart waste management.</p>
+                                <div class="project-tech"><span>IoT</span><span>Arduino</span><span>Sensors</span></div>
+                                <div class="project-links"><a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a></div>
+                            </div>
+                            <div class="project-glow glow-green"></div>
+                        </div>
+                        <div class="project-card glass-card" data-category="cv ai">
+                            <div class="project-media">
+                                <div class="project-media-placeholder"><i class="fas fa-face-smile"></i></div>
+                                <div class="project-badge badge-complete">Completed</div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Face Detection using ML</h3>
+                                <p>Real-time face detection and recognition using computer vision.</p>
+                                <div class="project-tech"><span>Python</span><span>OpenCV</span><span>ML</span></div>
+                                <div class="project-links"><a href="https://github.com/febintjames" target="_blank"><i
+                                            class="fab fa-github"></i> Code</a></div>
+                            </div>
+                            <div class="project-glow glow-purple"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="page-nav-bar">
+                <a href="#" data-page="experience" class="page-nav-btn"><i class="fas fa-arrow-left"></i> Experience</a>
+                <span class="page-nav-indicator">Projects</span>
+                <a href="#" data-page="education" class="page-nav-btn">Education <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ===== EDUCATION PAGE ===== -->
+        <div class="spa-page" id="page-education">
+            <section class="section" style="padding-top:120px;">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">05.</span> Education</h2>
+                    <div class="education-card glass-card">
+                        <div class="edu-icon"><i class="fas fa-university"></i></div>
+                        <div class="edu-info">
+                            <h3>Bachelor of Technology — Computer Science</h3>
+                            <p class="edu-school">Providence College of Engineering, Chengannur, Kerala</p>
+                            <p class="edu-year"><i class="fas fa-calendar"></i> June 2021 – May 2025</p>
+                        </div>
+                    </div>
+                    <div class="education-card glass-card">
+                        <div class="edu-icon"><i class="fas fa-school"></i></div>
+                        <div class="edu-info">
+                            <h3>Higher Secondary (Plus Two) — 93%</h3>
+                            <p class="edu-school">Marthoma Vocational Higher Secondary School</p>
+                            <p class="edu-year"><i class="fas fa-calendar"></i> June 2019 – June 2021</p>
+                        </div>
+                    </div>
+                    <div class="education-card glass-card">
+                        <div class="edu-icon"><i class="fas fa-book"></i></div>
+                        <div class="edu-info">
+                            <h3>SSLC (10th Grade) — 88%</h3>
+                            <p class="edu-school">Mor Severios Higher Secondary School</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">06.</span> Workshops</h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-item glass-card"><i class="fab fa-python"></i>
+                            <p>Web Dev using Python & Django — Facein, Kochi (2023 & 2024)</p>
+                        </div>
+                        <div class="achievement-item glass-card"><i class="fas fa-laptop-code"></i>
+                            <p>5-Day Django Workshop (Feb 2024)</p>
+                        </div>
+                        <div class="achievement-item glass-card"><i class="fas fa-globe"></i>
+                            <p>5-Day Python Web Dev Workshop (Nov 2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">07.</span> Achievements</h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-item glass-card"><i class="fas fa-microphone-alt"></i>
+                            <p>Seminar on Digital Twin Technology</p>
+                        </div>
+                        <div class="achievement-item glass-card"><i class="fas fa-code"></i>
+                            <p>IEEE Xtreme Coding Competition (17.0 & 16.0)</p>
+                        </div>
+                        <div class="achievement-item glass-card"><i class="fab fa-google"></i>
+                            <p>Google Cloud Study Jams GDSC</p>
+                        </div>
+                        <div class="achievement-item glass-card"><i class="fab fa-android"></i>
+                            <p>GDSC Compose Camp: Android Dev</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">08.</span> Certifications</h2>
+                    <div class="cert-grid">
+                        <div class="cert-card glass-card">
+                            <div class="cert-placeholder"><i class="fas fa-certificate"></i></div>
+                            <p>Add certification image</p>
+                        </div>
+                        <div class="cert-card glass-card">
+                            <div class="cert-placeholder"><i class="fas fa-certificate"></i></div>
+                            <p>Add certification image</p>
+                        </div>
+                        <div class="cert-card glass-card">
+                            <div class="cert-placeholder"><i class="fas fa-certificate"></i></div>
+                            <p>Add certification image</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="page-nav-bar">
+                <a href="#" data-page="projects" class="page-nav-btn"><i class="fas fa-arrow-left"></i> Projects</a>
+                <span class="page-nav-indicator">Education</span>
+                <a href="#" data-page="contact" class="page-nav-btn">Contact <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- ===== CONTACT PAGE ===== -->
+        <div class="spa-page" id="page-contact">
+            <section class="section" style="padding-top:120px;min-height:80vh;display:flex;align-items:center;">
+                <div class="container">
+                    <h2 class="section-title"><span class="title-number">09.</span> Let's Connect</h2>
+                    <p class="contact-subtitle">I'm a <strong>Jr. Robotics & AI Engineer</strong> open to exciting
+                        opportunities. Let's build something amazing!</p>
+                    <div class="contact-grid">
+                        <a href="mailto:febintj007@gmail.com" class="contact-card glass-card"><i
+                                class="fas fa-envelope"></i>
+                            <h3>Email</h3>
+                            <p>febintj007@gmail.com</p>
+                        </a>
+                        <a href="tel:+917902871746" class="contact-card glass-card"><i class="fas fa-phone"></i>
+                            <h3>Phone</h3>
+                            <p>+91 7902871746</p>
+                        </a>
+                        <a href="https://linkedin.com/in/febin-t-james" target="_blank"
+                            class="contact-card glass-card"><i class="fab fa-linkedin"></i>
+                            <h3>LinkedIn</h3>
+                            <p>febin-t-james</p>
+                        </a>
+                        <a href="https://github.com/febintjames" target="_blank" class="contact-card glass-card"><i
+                                class="fab fa-github"></i>
+                            <h3>GitHub</h3>
+                            <p>febintjames</p>
+                        </a>
+                    </div>
+                    <div style="text-align:center;margin-top:48px;"><a href="mailto:febintj007@gmail.com"
+                            class="btn btn-primary" style="font-size:1.1rem;padding:18px 40px;"><i
+                                class="fas fa-paper-plane"></i> Send Me a Message</a></div>
+                </div>
+            </section>
+            <div class="page-nav-bar">
+                <a href="#" data-page="education" class="page-nav-btn"><i class="fas fa-arrow-left"></i> Education</a>
+                <span class="page-nav-indicator">Contact</span>
+                <a href="#" data-page="home" class="page-nav-btn">Home <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-content"><button class="video-modal-close">&times;</button><video id="modalVideo"
+                controls></video></div>
+    </div>
+
+    <!-- AI Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <button id="chatToggle" class="chat-toggle"><i class="fas fa-robot"></i><span
+                class="chat-badge">AI</span></button>
+        <div id="chatBox" class="chat-box">
+            <div class="chat-header">
+                <div class="chat-header-info"><i class="fas fa-robot"></i><span>Febin's AI Assistant</span></div>
+                <div class="chat-header-actions">
+                    <button id="chatClose"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div id="chatMessages" class="chat-messages">
+                <div class="chat-msg bot">
+                    <p>Hi! 👋 I'm Febin's <em>AI-powered</em> assistant. Ask me anything — <em>"What are his
+                            skills?"</em>, <em>"Tell me about LuQ"</em>, or <em>"Show projects"</em></p>
+                </div>
+            </div>
+            <div class="chat-input-wrap">
+                <input type="text" id="chatInput" placeholder="Ask about Febin..." autocomplete="off">
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Guide Button -->
+    <div id="voiceGuide" class="voice-guide">
+        <button id="voiceGuideBtn" class="voice-guide-btn"><i class="fas fa-microphone"></i></button>
+        <div id="voiceGuidePanel" class="voice-guide-panel">
+            <h4><i class="fas fa-microphone"></i> Voice Commands</h4>
+            <p>Click the mic and say:</p>
+            <ul>
+                <li><em>"Go to home"</em></li>
+                <li><em>"Show about"</em> or <em>"Skills"</em></li>
+                <li><em>"Experience"</em> or <em>"Work"</em></li>
+                <li><em>"Projects"</em></li>
+                <li><em>"Education"</em> or <em>"Certificates"</em></li>
+                <li><em>"Contact"</em> or <em>"Email"</em></li>
+                <li><em>"Open chat"</em> or <em>"Help"</em></li>
+            </ul>
+            <button id="voiceGuideStart" class="btn btn-primary" style="width:100%;margin-top:12px;padding:12px;"><i
+                    class="fas fa-microphone"></i> Start Listening</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Designed & Built by <strong>Febin T James</strong> &copy; 2025 · <kbd
+                    style="font-size:0.65rem;padding:2px 6px;border:1px solid var(--glass-border);border-radius:4px;color:var(--text-secondary);">Ctrl+K</kbd>
+                Command Palette · <i class="fas fa-microphone" style="color:var(--accent-cyan);"></i> Voice Nav</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

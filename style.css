@@ -1803,7 +1803,7 @@ footer strong {
 /* ========== AI CHAT WIDGET ========== */
 .chat-widget {
     position: fixed;
-    bottom: 80px;
+    bottom: 100px;
     right: 24px;
     z-index: 9000;
 }
@@ -2082,7 +2082,7 @@ footer strong {
 /* ========== VOICE GUIDE WIDGET ========== */
 .voice-guide {
     position: fixed;
-    bottom: 80px;
+    bottom: 100px;
     left: 24px;
     z-index: 9000;
 }
@@ -2665,4 +2665,92 @@ footer strong {
         width: calc(100vw - 40px);
         left: 20px;
     }
+}
+
+/* ========== SERIAL DATA MONITOR ========== */
+.serial-monitor {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 200px;
+    background: rgba(6, 6, 18, 0.7);
+    border: 1px solid rgba(0, 255, 157, 0.3);
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 8000;
+    pointer-events: none;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+}
+
+.serial-header {
+    background: rgba(0, 255, 157, 0.1);
+    color: #00ff9d;
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    border-bottom: 1px solid rgba(0, 255, 157, 0.2);
+    letter-spacing: 1px;
+}
+
+.serial-body {
+    height: 300px;
+    padding: 8px;
+    font-size: 0.65rem;
+    color: rgba(0, 255, 157, 0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.serial-line {
+    white-space: nowrap;
+    animation: serialSlide 0.2s ease-out;
+}
+
+@keyframes serialSlide {
+    from {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== ENGINEERING X-RAY MODE ========== */
+body.x-ray-active {
+    background: #000810 !important;
+}
+
+body.x-ray-active .glass-card,
+body.x-ray-active .hero-content,
+body.x-ray-active .section {
+    border: 1px solid rgba(0, 240, 255, 0.4) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.x-ray-active img,
+body.x-ray-active video {
+    filter: grayscale(1) contrast(1.5) brightness(0.8) invert(1);
+    opacity: 0.6;
+}
+
+body.x-ray-active * {
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+}
+
+body.x-ray-active .lidar-scan {
+    opacity: 0.4;
+    background: repeating-linear-gradient(rgba(0, 240, 255, 0.05) 0px, rgba(0, 240, 255, 0.05) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0px, rgba(0, 240, 255, 0.05) 1px, transparent 1px, transparent 20px);
+}
+
+.x-ray-btn.active {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px var(--accent-cyan);
 }

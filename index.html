@@ -821,6 +821,9 @@
                 <button id="terminalToggle" class="hud-terminal-btn">
                     <i class="fas fa-terminal"></i> <span>ROS Terminal</span>
                 </button>
+                <button id="xRayToggle" class="hud-terminal-btn x-ray-btn">
+                    <i class="fas fa-microscope"></i> <span>X-RAY</span>
+                </button>
                 <div class="hud-status-node">
                     <span class="node-dot status-online"></span>
                     <span class="node-name">MASTER_NODE</span>
@@ -836,6 +839,14 @@
                     <span class="hud-label">SCAN</span>
                     <span class="hud-value status-active">ACTIVE</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Serial Data Monitor (Right Sidebar) -->
+        <div id="serialMonitor" class="serial-monitor">
+            <div class="serial-header">SERIAL: /raw_data</div>
+            <div id="serialBody" class="serial-body">
+                <div class="serial-line">0x4F 0x4B 0x0A...</div>
             </div>
         </div>
 

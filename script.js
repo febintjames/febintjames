@@ -19,6 +19,14 @@
     const pGeo = new THREE.BufferGeometry(); pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); pGeo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
     const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ size: 1.2, vertexColors: true, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
     scene.add(particles);
+
+    // Add 3D Grid / Point Cloud structure
+    const grid = new THREE.GridHelper(100, 20, 0x00f0ff, 0x00f0ff);
+    grid.material.transparent = true;
+    grid.material.opacity = 0.05;
+    grid.rotation.x = Math.PI / 2;
+    scene.add(grid);
+
     const ico = new THREE.Mesh(new THREE.IcosahedronGeometry(6, 1), new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.12 })); ico.position.set(14, 2, -10); scene.add(ico);
     const tor = new THREE.Mesh(new THREE.TorusGeometry(4, .4, 8, 24), new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true, transparent: true, opacity: 0.1 })); tor.position.set(-16, -5, -15); scene.add(tor);
     const oct = new THREE.Mesh(new THREE.OctahedronGeometry(3, 0), new THREE.MeshBasicMaterial({ color: 0x14b8a6, wireframe: true, transparent: true, opacity: 0.1 })); oct.position.set(-10, 10, -20); scene.add(oct);
@@ -31,6 +39,7 @@
     (function anim() {
         requestAnimationFrame(anim); fr++;
         particles.rotation.y += .00015; particles.rotation.x += .00005;
+        grid.rotation.z += 0.0001;
         ico.rotation.x += .002; ico.rotation.y += .003; tor.rotation.x += .003; tor.rotation.z += .002; oct.rotation.y += .004; oct.rotation.z += .002;
         camera.position.x += (mx * 3 - camera.position.x) * .015; camera.position.y += (-my * 3 - camera.position.y) * .015; camera.lookAt(scene.position);
         const p = pGeo.attributes.position.array; for (let i = 0; i < N; i++) p[i * 3 + 1] += Math.sin(fr * .003 + i) * .003; pGeo.attributes.position.needsUpdate = true;
@@ -496,6 +505,8 @@ const ROSEngine = {
         this.initHUD();
         this.initTelemetry();
         this.initLidar();
+        this.initSerialMonitor();
+        this.initXRay();
         this.addLog('info', 'ros2', 'Robotic System Interface fully operational.');
     },
 
@@ -509,6 +520,38 @@ const ROSEngine = {
                 toggleBtn.querySelector('span').textContent = this.isTerminalOpen ? 'Hide Logs' : 'ROS Terminal';
             });
         }
+    },
+
+    initSerialMonitor() {
+        const body = document.getElementById('serialBody');
+        if (!body) return;
+
+        setInterval(() => {
+            const types = ['odom', 'lidar', 'imu', 'hex'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            let data = '';
+
+            if (type === 'odom') data = `/odom: x=${(Math.random() * 2).toFixed(2)}, y=${(Math.random() - 0.5).toFixed(2)}`;
+            else if (type === 'lidar') data = `/lidar: [${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ...]`;
+            else if (type === 'imu') data = `/imu: q=[${(Math.random().toFixed(2))}, 0.00, 0.00, 1.00]`;
+            else data = `0x${Math.floor(Math.random() * 16777215).toString(16).toUpperCase()} 0xAA 0xFF`;
+
+            const line = document.createElement('div');
+            line.className = 'serial-line';
+            line.textContent = data;
+            body.appendChild(line);
+            if (body.children.length > 15) body.removeChild(body.children[0]);
+        }, 400);
+    },
+
+    initXRay() {
+        const btn = document.getElementById('xRayToggle');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('x-ray-active');
+            btn.classList.toggle('active');
+            this.addLog('warn', 'system', `X-Ray mode ${document.body.classList.contains('x-ray-active') ? 'ENABLED' : 'DISABLED'}`);
+        });
     },
 
     initTelemetry() {
@@ -532,7 +575,7 @@ const ROSEngine = {
             if (cVal) cVal.textContent = cpu + '%';
 
             // Slowly draining battery (illusory)
-            if (fr % 1000 === 0) {
+            if (globalThis.fr % 1000 === 0) {
                 battery = Math.max(0, battery - 0.1);
                 if (bBar) bBar.style.width = battery + '%';
                 if (bVal) bVal.textContent = Math.floor(battery) + '%';

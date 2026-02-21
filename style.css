@@ -1582,6 +1582,8 @@ footer strong {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: 280px;
+    /* Prevent overlap with fixed ROS Terminal on desktop */
 }
 
 .spa-page.active {
@@ -2441,6 +2443,7 @@ footer strong {
     justify-content: space-between;
     align-items: center;
     pointer-events: auto;
+    /* Ensure individual buttons are clickable */
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -2699,6 +2702,28 @@ footer strong {
     padding: 4px 8px;
     border-bottom: 1px solid rgba(0, 255, 157, 0.2);
     letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serial-close {
+    background: transparent;
+    border: none;
+    color: #00ff9d;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    padding: 2px 6px;
+}
+
+.serial-close:hover {
+    opacity: 1;
+}
+
+.serial-monitor.hidden {
+    display: none !important;
 }
 
 .serial-body {
@@ -3058,7 +3083,8 @@ body.x-ray-active .lidar-scan {
 
     /* -- Voice Guide -- */
     .voice-guide {
-        bottom: 120px;
+        bottom: 240px;
+        /* Stand above the terminal on mobile */
         left: 16px;
     }
 
@@ -3294,7 +3320,8 @@ body.x-ray-active .lidar-scan {
 
     /* -- Voice Guide -- */
     .voice-guide {
-        bottom: 100px;
+        bottom: 240px;
+        /* Stand above the terminal on mobile */
         left: 10px;
     }
 
@@ -3383,7 +3410,8 @@ body.x-ray-active .lidar-scan {
     }
 
     .voice-guide {
-        bottom: 80px;
+        bottom: 240px;
+        /* Stand above the terminal on mobile */
     }
 }
 

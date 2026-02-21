@@ -844,7 +844,10 @@
 
         <!-- Serial Data Monitor (Right Sidebar) -->
         <div id="serialMonitor" class="serial-monitor">
-            <div class="serial-header">SERIAL: /raw_data</div>
+            <div class="serial-header">
+                SERIAL: /raw_data
+                <button id="serialClose" class="serial-close"><i class="fas fa-times"></i></button>
+            </div>
             <div id="serialBody" class="serial-body">
                 <div class="serial-line">0x4F 0x4B 0x0A...</div>
             </div>
@@ -877,7 +880,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 
 </html>

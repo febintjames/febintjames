@@ -523,10 +523,21 @@ const ROSEngine = {
     },
 
     initSerialMonitor() {
+        const monitor = document.getElementById('serialMonitor');
         const body = document.getElementById('serialBody');
+        const closeBtn = document.getElementById('serialClose');
+
         if (!body) return;
 
+        if (closeBtn && monitor) {
+            closeBtn.addEventListener('click', () => {
+                monitor.classList.add('hidden');
+                this.addLog('info', 'system', 'Serial monitor stream detached.');
+            });
+        }
+
         setInterval(() => {
+            if (monitor && monitor.classList.contains('hidden')) return;
             const types = ['odom', 'lidar', 'imu', 'hex'];
             const type = types[Math.floor(Math.random() * types.length)];
             let data = '';

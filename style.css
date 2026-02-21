@@ -7,6 +7,15 @@
     box-sizing: border-box;
 }
 
+/* Mobile tap optimization */
+a,
+button,
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
 :root {
     --bg-primary: #060612;
     --bg-secondary: #0c0c24;
@@ -2082,9 +2091,9 @@ footer strong {
 /* ========== VOICE GUIDE WIDGET ========== */
 .voice-guide {
     position: fixed;
-    bottom: 100px;
+    bottom: 160px;
     left: 24px;
-    z-index: 9000;
+    z-index: 9999;
 }
 
 .voice-guide-btn {
@@ -2753,4 +2762,671 @@ body.x-ray-active .lidar-scan {
     background: var(--accent-cyan);
     color: var(--bg-primary);
     box-shadow: 0 0 15px var(--accent-cyan);
+}
+
+/* ================================================================
+   COMPREHENSIVE RESPONSIVE DESIGN
+   Phones, Tablets, Laptops, Desktops
+   ================================================================ */
+
+/* ---------- LARGE TABLETS & SMALL LAPTOPS (≤1024px) ---------- */
+@media (max-width: 1024px) {
+    .hud-container {
+        padding: 8px 20px;
+    }
+
+    .hud-left,
+    .hud-right {
+        gap: 16px;
+    }
+
+    .serial-monitor {
+        width: 160px;
+    }
+}
+
+/* ---------- TABLETS (≤768px) ---------- */
+@media (max-width: 768px) {
+
+    /* -- General -- */
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .section {
+        padding: 70px 0;
+    }
+
+    /* -- Hero Section -- */
+    #hero {
+        min-height: 80vh;
+        padding: 80px 0 40px;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-badge {
+        font-size: 0.65rem;
+    }
+
+    .hero-name {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.85rem;
+        padding: 0 8px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* -- Page Nav Grid -- */
+    .page-nav-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .page-nav-card {
+        padding: 16px 20px;
+    }
+
+    /* -- About Section -- */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .about-image {
+        order: -1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .image-frame {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    .about-info {
+        align-items: center;
+    }
+
+    /* -- Skills Grid -- */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .skill-category {
+        padding: 20px;
+    }
+
+    /* -- Timeline -- */
+    .timeline::before {
+        left: 16px;
+    }
+
+    .timeline-item {
+        padding-left: 44px !important;
+        padding-right: 0 !important;
+    }
+
+    .timeline-dot {
+        left: 16px !important;
+    }
+
+    .timeline-content {
+        padding: 20px;
+    }
+
+    /* -- Projects -- */
+    .project-filters {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .filter-btn {
+        font-size: 0.7rem;
+        padding: 8px 14px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-img-carousel {
+        height: 200px;
+    }
+
+    .project-info {
+        padding: 16px;
+    }
+
+    .project-links {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* -- Education -- */
+    .education-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .achievements-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* -- Contact -- */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+
+    .contact-subtitle {
+        font-size: 0.9rem;
+        padding: 0 8px;
+    }
+
+    /* -- Page Nav Bar -- */
+    .page-nav-bar {
+        padding: 16px;
+        gap: 8px;
+    }
+
+    .page-nav-btn {
+        padding: 8px 14px;
+        font-size: 0.65rem;
+    }
+
+    .page-nav-indicator {
+        display: none;
+    }
+
+    /* -- Section Titles -- */
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 32px;
+    }
+
+    /* -- Chat Widget -- */
+    .chat-box {
+        width: 320px;
+        height: 420px;
+        right: -12px;
+    }
+
+    .chat-widget {
+        bottom: 80px;
+    }
+
+    /* -- HUD -- */
+    .hud-container {
+        padding: 6px 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .hud-left,
+    .hud-right {
+        display: none;
+    }
+
+    .hud-center {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hud-terminal-btn {
+        font-size: 0.6rem;
+        padding: 5px 10px;
+    }
+
+    .hud-terminal-btn span {
+        font-size: 0.6rem;
+    }
+
+    .hud-status-node {
+        display: none;
+    }
+
+    /* -- ROS Terminal -- */
+    .ros-terminal {
+        width: calc(100vw - 32px);
+        left: 16px;
+    }
+
+    .terminal-body {
+        height: 160px;
+        font-size: 0.65rem;
+    }
+
+    /* -- Serial Monitor: hide on mobile -- */
+    .serial-monitor {
+        display: none;
+    }
+
+    /* -- Voice Guide -- */
+    .voice-guide {
+        bottom: 120px;
+        left: 16px;
+    }
+
+    .voice-guide-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+
+    .voice-guide-panel {
+        left: 0;
+        width: 260px;
+        bottom: 56px;
+    }
+
+    /* -- Video Modal -- */
+    .video-modal-content {
+        width: 95%;
+    }
+
+    .video-modal-close {
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+    }
+
+    /* -- Footer -- */
+    footer {
+        padding: 20px 0;
+    }
+
+    footer p {
+        font-size: 0.75rem;
+        text-align: center;
+        line-height: 1.8;
+    }
+
+    /* -- LiDAR scan -- */
+    .lidar-scan {
+        opacity: 0.05;
+    }
+
+    /* -- Cursor Canvas: disable on touch -- */
+    #cursor-canvas {
+        display: none;
+    }
+}
+
+/* ---------- SMALL PHONES (≤480px) ---------- */
+@media (max-width: 480px) {
+    .section {
+        padding: 50px 0;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    /* -- Hero -- */
+    #hero {
+        min-height: 75vh;
+        padding: 70px 0 30px;
+    }
+
+    .hero-badge {
+        font-size: 0.55rem;
+        padding: 4px 10px;
+    }
+
+    .hero-name {
+        font-size: clamp(1.6rem, 10vw, 2.2rem);
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .hero-description {
+        font-size: 0.78rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .stat-num {
+        font-size: 1.3rem;
+    }
+
+    /* -- Section Titles -- */
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 24px;
+    }
+
+    .title-number {
+        font-size: 0.75rem;
+    }
+
+    /* -- Skills -- */
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category {
+        padding: 16px;
+    }
+
+    .tag {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+
+    /* -- Timeline -- */
+    .timeline-content {
+        padding: 16px;
+    }
+
+    .timeline-header h3 {
+        font-size: 0.85rem;
+    }
+
+    .timeline-details li {
+        font-size: 0.78rem;
+    }
+
+    /* -- Projects -- */
+    .project-img-carousel {
+        height: 160px;
+    }
+
+    .project-info h3 {
+        font-size: 0.75rem;
+    }
+
+    .project-info p {
+        font-size: 0.72rem;
+    }
+
+    .project-tech span {
+        font-size: 0.58rem;
+    }
+
+    .btn-play-video {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+    }
+
+    /* -- Education -- */
+    .education-card {
+        padding: 16px;
+    }
+
+    .edu-info h3 {
+        font-size: 0.85rem;
+    }
+
+    .edu-school,
+    .edu-year {
+        font-size: 0.78rem;
+    }
+
+    .achievement-item {
+        padding: 16px;
+    }
+
+    .achievement-item p {
+        font-size: 0.78rem;
+    }
+
+    /* -- Contact -- */
+    .contact-card h3 {
+        font-size: 0.85rem;
+    }
+
+    .contact-card p {
+        font-size: 0.75rem;
+        word-break: break-all;
+    }
+
+    /* -- Chat Widget -- */
+    .chat-widget {
+        bottom: 72px;
+        right: 8px;
+    }
+
+    .chat-toggle {
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
+    }
+
+    .chat-box {
+        width: calc(100vw - 16px);
+        height: 400px;
+        right: -4px;
+        bottom: 56px;
+        border-radius: 12px;
+    }
+
+    .chat-header-info span {
+        font-size: 0.8rem;
+    }
+
+    #chatInput {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    /* -- HUD -- */
+    .hud-container {
+        padding: 5px 8px;
+    }
+
+    .hud-terminal-btn {
+        font-size: 0.55rem;
+        padding: 4px 8px;
+        gap: 4px;
+    }
+
+    /* -- ROS Terminal -- */
+    .ros-terminal {
+        width: calc(100vw - 16px);
+        left: 8px;
+    }
+
+    .terminal-body {
+        height: 140px;
+        font-size: 0.6rem;
+    }
+
+    /* -- Voice Guide -- */
+    .voice-guide {
+        bottom: 100px;
+        left: 10px;
+    }
+
+    .voice-guide-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .voice-guide-panel {
+        width: calc(100vw - 40px);
+        left: -4px;
+        bottom: 50px;
+    }
+
+    /* -- Page Nav Bar -- */
+    .page-nav-bar {
+        padding: 12px 8px;
+    }
+
+    .page-nav-btn {
+        padding: 8px 10px;
+        font-size: 0.6rem;
+    }
+
+    /* -- Footer -- */
+    footer .container {
+        padding: 0 12px;
+    }
+
+    footer p {
+        font-size: 0.65rem;
+    }
+
+    footer kbd {
+        display: none;
+    }
+}
+
+/* ---------- VERY SMALL PHONES (≤360px) ---------- */
+@media (max-width: 360px) {
+    .hero-name {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .hero-cta .btn {
+        font-size: 0.75rem;
+        padding: 10px 16px;
+    }
+
+    .nav-logo {
+        font-size: 1rem;
+    }
+
+    .skill-category h3 {
+        font-size: 0.85rem;
+    }
+
+    .chat-box {
+        height: 360px;
+    }
+}
+
+/* ---------- LANDSCAPE PHONES ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+    #hero {
+        min-height: auto;
+        padding: 60px 0 20px;
+    }
+
+    .hero-stats {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .voice-guide {
+        bottom: 80px;
+    }
+}
+
+/* ---------- TABLETS IN PORTRAIT (768-1024, portrait) ---------- */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .serial-monitor {
+        display: block;
+        width: 140px;
+    }
+}
+
+/* ---------- PRINT ---------- */
+@media print {
+
+    .ros-hud,
+    .serial-monitor,
+    .lidar-scan,
+    .voice-guide,
+    .chat-widget,
+    #cursor-canvas,
+    #bg-canvas,
+    .voice-feedback,
+    .cmd-palette {
+        display: none !important;
+    }
 }
